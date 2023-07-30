@@ -74,4 +74,70 @@ func main() {
 		fmt.Println("fuga")
 	}
 
+	// goto
+	gt := '1'
+	if gt == '1' {
+		fmt.Println("goto1")
+		goto Done
+		fmt.Println("goto2")
+	}
+
+Done:
+	fmt.Println("done")
+
+	// func
+	fmt.Println(add(1, 1))
+
+	// struct
+	p1 := Person{"John", 20}
+	fmt.Println(p1.hello())
+	b1 := Book{"title"}
+
+	// interface
+	PrintOut(p1)
+	PrintOut(b1)
+
+	// pointer
+	po1 := 1
+	po2 := 2
+	fn(po1, &po2)
+	fmt.Println(po1, po2)
+}
+
+func add(x int, y int) int {
+	return x + y
+}
+
+type Person struct {
+	name string
+	age  int
+}
+
+func (p *Person) hello() string {
+	return "Hello, I'm " + p.name
+}
+
+func (p Person) ToString() string {
+	return p.name
+}
+
+type Book struct {
+	title string
+}
+
+func (b Book) ToString() string {
+	return b.title
+}
+
+type Printable interface {
+	ToString() string
+}
+
+func PrintOut(p Printable) {
+	fmt.Println(p.ToString())
+}
+
+func fn(a int, b *int) {
+	a = 100
+	*b = 200
 }

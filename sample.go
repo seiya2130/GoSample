@@ -2,7 +2,45 @@ package main
 
 import "fmt"
 
+func test() {
+	fmt.Println("test")
+	num := 0
+	fmt.Println(num)
+
+	type Test string
+	var t1 Test = "1"
+	fmt.Println(t1)
+
+	arry := [3]int{0, 1, 2}
+	for i := 0; i < len(arry); i++ {
+		fmt.Println(arry[i])
+	}
+
+	s1 := []int{}
+	s1 = append(s1, 1)
+	fmt.Println(s1)
+
+	if 1 > 0 {
+		fmt.Println(true)
+	} else {
+		fmt.Println(false)
+	}
+
+	x := 2
+	switch x {
+	case 1:
+		fmt.Println(true)
+	default:
+		fmt.Println(false)
+	}
+
+	h1 := Human{"John", 20}
+	h1.hello()
+}
+
 func main() {
+	test()
+	return
 
 	// 出力
 	fmt.Println("Hello World!")
@@ -71,7 +109,6 @@ func main() {
 		fmt.Println("hoge")
 		fallthrough
 	case "fuga":
-		fmt.Println("fuga")
 	}
 
 	// goto
@@ -85,6 +122,11 @@ func main() {
 Done:
 	fmt.Println("done")
 
+	// for文
+	for i := 0; i < 5; i++ {
+		fmt.Println(i)
+	}
+
 	// func
 	fmt.Println(add(1, 1))
 
@@ -96,6 +138,10 @@ Done:
 	// interface
 	PrintOut(p1)
 	PrintOut(b1)
+
+	// generics
+	fmt.Println(GenericAdd(1, 2))
+	fmt.Println(GenericAdd(1.5, 2.5))
 
 	// pointer
 	po1 := 1
@@ -111,6 +157,15 @@ func add(x int, y int) int {
 type Person struct {
 	name string
 	age  int
+}
+
+type Human struct {
+	name string
+	age  int
+}
+
+func (h *Human) hello() {
+	fmt.Println("Hello, I'm " + h.name)
 }
 
 func (p *Person) hello() string {
@@ -140,4 +195,9 @@ func PrintOut(p Printable) {
 func fn(a int, b *int) {
 	a = 100
 	*b = 200
+}
+
+// generics
+func GenericAdd[T int | float64](a T, b T) T {
+	return a + b
 }
